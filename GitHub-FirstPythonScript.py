@@ -20,10 +20,10 @@ arcpy.env.workspace = "C:\\Users\\kelechi\\Documents\\GitHub\\firstpythonscript-
 selectEcoregion = arcpy.management.SelectLayerByAttribute('ks_ecoregions', 'NEW_SELECTION',"US_L3NAME = 'Flint Hills' ")
 
 # Create a 10 km buffer around selected ecoregion
-createBuffer_10km = arcpy.analysis.Buffer(selectEcoregion, 'Buffer_10km', '10 Kilometers')
+arcpy.analysis.Buffer(selectEcoregion, 'Buffer_10km', '10 Kilometers')
 
 # Clip rivers within buffer
-arcpy.analysis.Clip('ks_major_rivers', createBuffer_10km,'ks_rivers_10km')
+arcpy.analysis.Clip('ks_major_rivers', 'Buffer_10km', 'ks_rivers_10km')
 
 # Add a 'Miles' field to attribute table of selected rivers
 arcpy.AddField_management('ks_rivers_10km', 'riverMiles', 'FLOAT')
